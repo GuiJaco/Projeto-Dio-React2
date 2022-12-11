@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { Container, TextContainer, Column, Wrapper, SubTextContent, SubTitleContent, TextContent, TitleContent } from "./styles"
 
 const SignUp = () => {
-    const { control, handleSubmit, formState: { errors } } = useForm();
+    const { control } = useForm();
     
     
     return(<>
@@ -24,12 +24,12 @@ const SignUp = () => {
                 <TitleContent>Comece agora grátis</TitleContent>
                 <SubTitleContent>Crie sua conta e make the change._</SubTitleContent>
                 <Wrapper>
-                    <form onSubmit={handleSubmit}>
+                    <form>
                        <Input name="Nome Completo" control={control} placeholder="Nome Completo"leftIcon={<FaUser/>}/>  
 
                        <Input name="email" control={control} placeholder="E-mail"leftIcon={<MdMail/>}/>
 
-                       <Input name="password" errorMesage={errors?.password?.message} control={control} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
+                       <Input name="password" control={control} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>
                     </form>
                     <Button title="Criar minha conta" variant="secondary" type="submit"/>
                 </Wrapper>

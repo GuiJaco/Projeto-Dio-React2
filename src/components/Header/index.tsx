@@ -10,10 +10,11 @@ import {
     UserPicture,
     Wrapper 
 } from "./styles"
+import { IHeader } from "./types";
 
 import logo from "../../assets/logo-dio.png"
 
-const Header = ({autenticado}) => {
+const Header = ({autenticado}: IHeader) => {
     const navigate = useNavigate();
 
     const handleClickSignUp = () => {

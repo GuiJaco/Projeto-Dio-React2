@@ -7,6 +7,7 @@ import * as yup from "yup";
 import Input from "../../components/Input";
 import Header from "../../components/Header";
 import { api } from "../../services/api";
+import { IFormData } from "./types";
 
 import { Container, Column, CreatText, ForgetText, Row, SubTitleLogin, Title,TitleLogin, Wrapper } from "./styles"
 
@@ -19,12 +20,12 @@ const schema = yup.object({
 const Login = () => {
     const navigate = useNavigate();
 
-    const { control, handleSubmit , formState: { errors } } = useForm({
+    const { control, handleSubmit , formState: { errors } } = useForm<IFormData>({
         resolver: yupResolver(schema),
         mode: 'onChange'
     });
 
-    const onSubmit = async formData => {
+    const onSubmit = async (formData: IFormData) => {
         try{
             const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`)
             if(data.length === 1){
@@ -50,9 +51,9 @@ const Login = () => {
                     <TitleLogin>Faça seu cadastro</TitleLogin>
                     <SubTitleLogin>Faça seu login e make the change._</SubTitleLogin>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <Input name="email" errorMesage={errors?.email?.message} control={control} placeholder="E-mail"leftIcon={<MdMail/>}/>    
+                        <Input name="email" errorMessage={errors?.email?.message} control={control} placeholder="E-mail"leftIcon={<MdMail/>}/>    
 
-                        <Input name="password" errorMesage={errors?.password?.message} control={control} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>    
+                        <Input name="password" errorMessage={errors?.password?.message} control={control} placeholder="Senha" type="password" leftIcon={<MdLock/>}/>    
 
                         <Button title="Entrar" variant="secondary" type="submit"/>
                     </form>
